@@ -18,6 +18,4 @@ public class Offer {
     private Long allCosts;
     private String link;
     private Long time;
-
-
 }
