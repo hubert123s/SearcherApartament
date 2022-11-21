@@ -1,16 +1,14 @@
-package com.example.searcherapartament.geocoding.dto;
+package com.example.searcherapartament.domain.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import java.util.List;
 
 @Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class ApiDto {
-    private List<DataDto> data;
+public class LocationsDto {
+    List<PropertiesDto> properties;
 }

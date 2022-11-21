@@ -1,22 +1,21 @@
-package com.example.searcherapartament.geocoding;
+package com.example.searcherapartament.controller;
 
+import com.example.searcherapartament.service.GeocodingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/coordinate")
-public class CoordinateControler {
-    private final CoordinateService coordinateService;
+@RequestMapping("/geocoding")
+public class GeocodingController {
+    private final GeocodingService geocodingService;
 
     @GetMapping
-    String getCoordinate(@RequestParam String query)
+    public String get(@RequestParam String query)
     {
-       return coordinateService.getLatitude(query).toString()+coordinateService.getLongitude(query);
+        return geocodingService.getLocationsForTravelTimeAPI(query);
     }
 }
