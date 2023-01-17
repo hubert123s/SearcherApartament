@@ -16,10 +16,6 @@ public class OfferService {
     private final OfferSystem offerSystem;
     private final GeocodingService geocodingService;
 
-   public OfferSettings saveOfferSetings(OfferSettings offerSettings)
-    {
-        return offerRepository.save(offerSettings);
-    }
     public OfferSettings searchOffer(OfferSettings offerSettings)
     {
 
