@@ -23,7 +23,7 @@ public class OfferSettings {
     private String perfectLocation;
     private Double latitudePerfectLocation;
     private Double longitudePerfectLocation;
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true,fetch = FetchType.EAGER)
     List<Offer> offerList = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
@@ -31,8 +31,4 @@ public class OfferSettings {
 
     private Long priceFrom;
     private Long priceTo;
-
-
-
-
 }

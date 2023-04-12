@@ -16,10 +16,14 @@ public class OfferService {
     private final OfferSystem offerSystem;
     private final GeocodingService geocodingService;
 
-    public OfferSettings searchOffer(OfferSettings offerSettings)
-    {
+    public List<Offer> selectedOffer(Long id) {
+        return offerRepository.findById(id)
+                .stream()
+                .flatMap(offerSettings -> offerSettings.getOfferList().stream())
+                .toList();
+    }
 
-
+    public OfferSettings searchOffer(OfferSettings offerSettings){
         String query = offerSettings.getPerfectLocation();
         offerSettings.setLatitudePerfectLocation(geocodingService.getLatitude(query));
 
@@ -30,7 +34,9 @@ public class OfferService {
         offerSettings.setOfferList(selectedOffer);
         offerRepository.save(offerSettings);
         return offerSettings ;
-
+    }
+    public List<OfferSettings> findAllOfferSettings(){
+        return offerRepository.findAll();
     }
 
 

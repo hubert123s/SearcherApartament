@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/geocoding")
+@RequestMapping("/api/geocoding")
 public class GeocodingController {
     private final GeocodingService geocodingService;
 
