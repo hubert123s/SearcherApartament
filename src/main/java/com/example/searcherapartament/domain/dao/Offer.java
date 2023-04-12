@@ -9,13 +9,13 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@ToString
 public class Offer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String locationName;
     private Long allCosts;
-    private String link;
+    private String link;//Offer
     private Long time;
+    private String imageLink;
 }

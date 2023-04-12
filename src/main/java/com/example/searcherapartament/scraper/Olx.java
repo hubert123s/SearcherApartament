@@ -13,6 +13,8 @@ import java.util.List;
 public class Olx {
     private final DocumentHelper documentHelper;
     private final static int DIFFERENCETOREMOVE = 13;
+    private final static String CSSQUERYBASICCOST = "h3.css-ddweki.er34gjf0";
+   // css-ddweki er34gjf0
     //cityNormalizedName\":\"wroclaw\",\"regionName\":\"Dolnośląskie\",
     // \"regionId\":3,\"regionNormalizedName\":\"dolnoslaskie\",\"districtName\"
     // :\"Psie Pole\",\"districtId\":389,\"pathName\":\"Dolnośląskie, Wrocław, Psie Pole\"},
@@ -26,7 +28,7 @@ public class Olx {
     public Long getBasicCost(String url)
     {
         Document document =documentHelper.getDocument(url);
-        return Long.valueOf(document.select("h3.css-okktvh-Text.eu5v0x0").text().replace("zł","").replace(" ","").trim());
+        return Long.valueOf(document.select(CSSQUERYBASICCOST).text().replace("zł","").replace(" ","").trim());
     }
     public Long getAdditionalCost(String url)
     {
@@ -53,7 +55,6 @@ public class Olx {
                     }
                     return 0L;
                 }
-
             }
         }
         return 0L;
@@ -66,10 +67,29 @@ public class Olx {
         String splitDocument = newDocument.toString().split("\"")[0];
         return splitDocument.substring(0,splitDocument.length()-1);
     }
-    boolean isActiveOffer(String url)
+    public boolean isActiveOffer(String url)
     {
         Document document = documentHelper.getDocument(url);
         String divClass= "h6.css-1tcorc4-Text.eu5v0x0";
         return document.select(divClass).text().contains("To ogłoszenie nie jest już dostępne")?false:true;
+    }
+//    public boolean isFewViewsOffer(String url, int fewViews){
+//        Document document = documentHelper.getDocument(url);
+//        String divClass= "span.css-42xwsi";
+//        //System.out.println(document.toString());
+//        System.out.println("views"+document.select(divClass).text());
+//        System.out.println("views"+document.select("span.css-12hdxwj"));
+//        System.out.println("views"+document.select("span.css-19yf5ek"));
+//        return false;
+//    }
+    public String getImageLink(String url){
+        String divClass =".swiper-zoom-container";
+        Document document =documentHelper.getDocument(url);
+       // System.out.println("koncowe "+document.select(".css-1bmvjcs").first().attr("src")); // inna rozdzielczosc jest w srcset
+        try {
+            return document.select(".css-1bmvjcs").first().attr("src");
+        }catch (NullPointerException exception){
+            return " ";
+        }
     }
 }

@@ -51,5 +51,11 @@ class olxTest {
         String url="https://www.olx.pl/d/oferta/2-pokoje-osobna-kuchnia-duzy-balkon-CID3-IDRHQTT.html";
         assertEquals("Dolnośląskie, Wrocław, Psie Pole",olx.getLocation(url));
     }
+    @Test
+    void showImage(){
+        String url = "https://www.olx.pl/d/oferta/18m2-balkon-tylko-4-os-serwis-sprzatajacy-uam-up-ue-um-batorego-CID3-IDTWWrt.html";
+        String imageUrl ="https://ireland.apollo.olxcdn.com:443/v1/files/oh7vmivnka8t3-PL/image;s=1500x1000";
+        assertEquals(imageUrl,olx.getImageLink(url));
+    }
 
 }
