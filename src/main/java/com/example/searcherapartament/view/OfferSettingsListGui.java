@@ -13,9 +13,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OfferSettingsListGui extends Div implements AfterNavigationObserver {
     private final OfferService offerService;
+    Grid<OfferSettings> offerSettingsGrid = new Grid<>(OfferSettings.class,false);
+
     @Override
     public void afterNavigation(AfterNavigationEvent afterNavigationEvent) {
-        Grid<OfferSettings> offerSettingsGrid = new Grid<OfferSettings>(OfferSettings.class,false);
+        configureGrid();
+        add(offerSettingsGrid);
+    }
+    public void configureGrid(){
         offerSettingsGrid.addColumn(OfferSettings::getPerfectLocation).setHeader("Perfect Location");
         offerSettingsGrid.addColumn(OfferSettings::getPriceFrom).setHeader("Price from");
         offerSettingsGrid.addColumn(OfferSettings::getPriceTo).setHeader("Price to");
@@ -24,6 +29,5 @@ public class OfferSettingsListGui extends Div implements AfterNavigationObserver
                 .withProperty("id",OfferSettings::getId)
         ).setHeader("Name").setWidth("15px");
         offerSettingsGrid.setItems(offerService.findAllOfferSettings());
-        add(offerSettingsGrid);
     }
 }

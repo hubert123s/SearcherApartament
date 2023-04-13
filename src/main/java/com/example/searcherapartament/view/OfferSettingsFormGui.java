@@ -28,16 +28,7 @@ public class OfferSettingsFormGui extends VerticalLayout {
     public OfferSettingsFormGui(OfferService offerService){
         addClassName("offersettings"); // do CSS
         setSizeFull();
-        menuBar.addItem("List of offer settings", e -> {
-            UI.getCurrent().getPage().setLocation("/offer");
-        });
-        menuBar.addItem("Set offer settings", e -> {
-            UI.getCurrent().getPage().setLocation("/hello");
-        });
-        button.addClickListener(buttonClickEvent -> {
-           OfferSettings offerSettings1= offerService.searchOffer(getOfferSettings());
-            UI.getCurrent().getPage().setLocation("/offer/"+offerSettings1.getId());
-        });
+        configureMenuBar(offerService);
         add(menuBar,textFieldLocation,numberFieldPriceFrom,numberFieldPriceTo,textFieldNumberOfPagesToScraping,comboboxTransportType,comboboxCity,button);
     }
     OfferSettings getOfferSettings(){
@@ -48,5 +39,17 @@ public class OfferSettingsFormGui extends VerticalLayout {
         offerSettings.setTransportType(comboboxTransportType.getValue());
         offerSettings.setCity(comboboxCity.getValue());
         return offerSettings;
+    }
+    public void configureMenuBar(OfferService offerService){
+        menuBar.addItem("List of offer settings", e -> {
+            UI.getCurrent().getPage().setLocation("/offer");
+        });
+        menuBar.addItem("Set offer settings", e -> {
+            UI.getCurrent().getPage().setLocation("/hello");
+        });
+        button.addClickListener(buttonClickEvent -> {
+            OfferSettings offerSettings1= offerService.searchOffer(getOfferSettings());
+            UI.getCurrent().getPage().setLocation("/offer/"+offerSettings1.getId());
+        });
     }
 }

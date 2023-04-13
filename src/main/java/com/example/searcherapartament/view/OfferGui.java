@@ -19,29 +19,31 @@ import lombok.RequiredArgsConstructor;
 public class OfferGui  extends Div implements BeforeEnterObserver, AfterNavigationObserver {
     private Long id;
     private final OfferService offerService;
+    Grid<Offer> offerGrid =new Grid<>(Offer.class,false);
     @Override
     public void beforeEnter(BeforeEnterEvent beforeEnterEvent) {
         id = beforeEnterEvent.getRouteParameters().getLong("id").get();
     }
     @Override
     public void afterNavigation(AfterNavigationEvent event) {
+        configureGrid();
         Text text =new Text("You are checking the offer with the number "+id);
-        Grid<Offer> offerGrid =new Grid<>(Offer.class,false);
+        add(text,offerGrid);
+    }
+    public void configureGrid(){
         offerGrid.setItems(offerService.selectedOffer(id));
-
         offerGrid.addColumn(Offer::getId).setHeader("Id").setWidth("10px");
         offerGrid.addColumn(Offer::getLocationName).setHeader("Location Name").setAutoWidth(true);
         offerGrid.addColumn(Offer::getTime).setHeader("Time");
         offerGrid.addColumn(Offer::getAllCosts).setHeader("All costs");
         offerGrid.addColumn(new ComponentRenderer<>(item -> {
-                    Image image = new Image(item.getImageLink(),"Image description");
-                    image.setWidth("216px");
-                    image.setHeight("152px");
-                    return image;
-                })).setHeader("Image").setAutoWidth(true);
+            Image image = new Image(item.getImageLink(),"Image description");
+            image.setWidth("216px");
+            image.setHeight("152px");
+            return image;
+        })).setHeader("Image").setAutoWidth(true);
         offerGrid.addColumn(TemplateRenderer .<Offer>of("<a href='[[item.link]]'>Link</a>")
                 .withProperty("link", Offer::getLink)
         ).setHeader("Link to Offer");
-        add(text,offerGrid);
     }
 }
