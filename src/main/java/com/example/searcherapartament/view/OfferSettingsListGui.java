@@ -21,14 +21,15 @@ public class OfferSettingsListGui extends Div implements AfterNavigationObserver
         add(offerSettingsGrid);
     }
     public void configureGrid(){
-        offerSettingsGrid.addColumn(OfferSettings::getPerfectLocation).setHeader("Perfect Location");
-        offerSettingsGrid.addColumn(OfferSettings::getPriceFrom).setHeader("Price from");
-        offerSettingsGrid.addColumn(OfferSettings::getPriceTo).setHeader("Price to");
-        offerSettingsGrid.addColumn(OfferSettings::getCity).setHeader("City");
+        offerSettingsGrid.addColumn(OfferSettings::getPerfectLocation).setHeader("Perfect Location").setKey("location");
+        offerSettingsGrid.addColumn(OfferSettings::getPriceFrom).setHeader("Price from").setKey("pricefrom");
+        offerSettingsGrid.addColumn(OfferSettings::getPriceTo).setHeader("Price to").setKey("priceto");
+        offerSettingsGrid.addColumn(OfferSettings::getCity).setHeader("City").setKey("city");
         offerSettingsGrid.addColumn(TemplateRenderer.<OfferSettings>of("<a href='offer/[[item.id]]'>[[item.id]]</a>")
                 .withProperty("id",OfferSettings::getId)
-        ).setHeader("Name").setWidth("15px");
+        ).setHeader("Link to offers").setWidth("15px").setKey("link");
         offerSettingsGrid.setItems(offerService.findAllOfferSettings());
-        offerSettingsGrid.getColumns().forEach(offerSettingsColumn -> offerSettingsColumn.setAutoWidth(true));
+        offerSettingsGrid.setMultiSort(true);
+        offerSettingsGrid.setSortableColumns("pricefrom","priceto","city");
     }
 }

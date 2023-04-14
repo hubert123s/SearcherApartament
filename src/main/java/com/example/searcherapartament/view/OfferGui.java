@@ -1,6 +1,7 @@
 package com.example.searcherapartament.view;
 
 import com.example.searcherapartament.domain.dao.Offer;
+import com.example.searcherapartament.domain.dao.OfferSettings;
 import com.example.searcherapartament.service.OfferService;
 import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.grid.Grid;
@@ -32,10 +33,10 @@ public class OfferGui  extends Div implements BeforeEnterObserver, AfterNavigati
     }
     public void configureGrid(){
         offerGrid.setItems(offerService.selectedOffer(id));
-        offerGrid.addColumn(Offer::getId).setHeader("Id").setWidth("10px");
-        offerGrid.addColumn(Offer::getLocationName).setHeader("Location Name").setAutoWidth(true);
-        offerGrid.addColumn(Offer::getTime).setHeader("Time");
-        offerGrid.addColumn(Offer::getAllCosts).setHeader("All costs");
+        offerGrid.addColumn(Offer::getId).setHeader("Id").setWidth("10px").setKey("id");
+        offerGrid.addColumn(Offer::getLocationName).setHeader("Location Name").setAutoWidth(true).setKey("locationname");
+        offerGrid.addColumn(Offer::getTime).setHeader("Time").setKey("time");
+        offerGrid.addColumn(Offer::getAllCosts).setHeader("All costs").setKey("allcosts");
         offerGrid.addColumn(new ComponentRenderer<>(item -> {
             Image image = new Image(item.getImageLink(),"Image description");
             image.setWidth("216px");
@@ -46,5 +47,7 @@ public class OfferGui  extends Div implements BeforeEnterObserver, AfterNavigati
                 .withProperty("link", Offer::getLink)
         ).setHeader("Link to Offer");
         offerGrid.getColumns().forEach(offerColumn -> offerColumn.setAutoWidth(true));
+        offerGrid.setSortableColumns("id","locationname","time","allcosts");
+        offerGrid.setMultiSort(true);
     }
 }
