@@ -26,6 +26,11 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.2.18.jre7</version>
+        </dependency>
         <!-- https://mvnrepository.com/artifact/com.vaadin/vaadin-spring-boot-starter -->
         <dependency>
             <groupId>com.vaadin</groupId>
