@@ -45,5 +45,6 @@ public class OfferGui  extends Div implements BeforeEnterObserver, AfterNavigati
         offerGrid.addColumn(TemplateRenderer .<Offer>of("<a href='[[item.link]]'>Link</a>")
                 .withProperty("link", Offer::getLink)
         ).setHeader("Link to Offer");
+        offerGrid.getColumns().forEach(offerColumn -> offerColumn.setAutoWidth(true));
     }
 }

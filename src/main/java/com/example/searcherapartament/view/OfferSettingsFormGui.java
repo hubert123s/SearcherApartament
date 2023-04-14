@@ -17,6 +17,7 @@ import com.vaadin.flow.router.Route;
 @PageTitle("Searcher Offer")
 @Route("hello")
 public class OfferSettingsFormGui extends VerticalLayout {
+    private static final String CONSTWIDTH ="200px";
     MenuBar menuBar = new MenuBar();
     TextField textFieldLocation = new TextField("Perfect Location"); // dodac example Wroclaw pl. Grunwaldzki
     NumberField numberFieldPriceFrom = new NumberField("Price from");
@@ -28,8 +29,18 @@ public class OfferSettingsFormGui extends VerticalLayout {
     public OfferSettingsFormGui(OfferService offerService){
         addClassName("offersettings"); // do CSS
         setSizeFull();
+        configureWidth();
         configureMenuBar(offerService);
         add(menuBar,textFieldLocation,numberFieldPriceFrom,numberFieldPriceTo,textFieldNumberOfPagesToScraping,comboboxTransportType,comboboxCity,button);
+    }
+    public void configureWidth(){
+        textFieldLocation.setWidth(CONSTWIDTH);
+        numberFieldPriceFrom.setWidth(CONSTWIDTH);
+        numberFieldPriceTo.setWidth(CONSTWIDTH);
+        textFieldNumberOfPagesToScraping.setWidth(CONSTWIDTH);
+        comboboxTransportType.setWidth(CONSTWIDTH);
+        comboboxCity.setWidth(CONSTWIDTH);
+        button.setWidth(CONSTWIDTH);
     }
     OfferSettings getOfferSettings(){
         OfferSettings offerSettings = new OfferSettings();

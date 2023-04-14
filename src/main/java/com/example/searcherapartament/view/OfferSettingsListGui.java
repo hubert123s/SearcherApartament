@@ -29,5 +29,6 @@ public class OfferSettingsListGui extends Div implements AfterNavigationObserver
                 .withProperty("id",OfferSettings::getId)
         ).setHeader("Name").setWidth("15px");
         offerSettingsGrid.setItems(offerService.findAllOfferSettings());
+        offerSettingsGrid.getColumns().forEach(offerSettingsColumn -> offerSettingsColumn.setAutoWidth(true));
     }
 }
