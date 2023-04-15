@@ -6,7 +6,9 @@ I noticed that the search engine of the ad portal does not include the rent to t
 
 • Maven
 
-• H2 Database
+• Vaadin
+
+• PostgreSQL
 
 • Hibernate/JPA
 
@@ -18,4 +20,4 @@ I noticed that the search engine of the ad portal does not include the rent to t
 
 ### Endpoints:
 
-####  GET /meal - returns a list of ads according to search settings
+####  POST /api/offer - returns a list of ads according to search settings
