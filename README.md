@@ -16,6 +16,10 @@ I noticed that the search engine of the ad portal does not include the rent to t
 
 • Integration Tests
 
+• Vaadin
+
+• PostgreSQL
+
 ### Endpoints:
 
 ####  GET /meal - returns a list of ads according to search settings
